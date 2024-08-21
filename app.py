@@ -20,12 +20,13 @@ def process_pdf(pdf_file):
     for j in range(num_pages - 1):
         page = pdfdoc.pages[j]
         page_content = page.extract_text()
+        print(page_content)
         records_per_page = page_content.count('CONFIDENTIAL')
         Students = page_content.split("CONFIDENTIAL")[:2]  # only first 2 elements
         #     type 1: 1 page 1 record  ---> records_per_page = 1
         #     type 2: 1 page 2 records ---> records_per_page = 2
         #     type 3: second record on page 1 + 2 both
-        '''*****page format accomodation(type 1, 2, 3)************'''
+        # '''*****page format accomodation(type 1, 2, 3)************'''
         if records_per_page != 2:  # record of 2nd student on two pages
             page2 = pdfdoc.pages[j + 1].extract_text()
             Students[1] = Students[1] + '\n' + page2  # also covers type 1
@@ -34,14 +35,14 @@ def process_pdf(pdf_file):
                 Students = Students[:1]
         if flag == 'red' and j % 2 != 0:
             continue
-        '''******************************************'''
+        # '''******************************************'''
 
         for i in Students:
             lines = []
             student_dict = {}  # one dictionary for each student. key is sub name, value is records
             ind_sn = i.find("SEAT NO.:") + 9
             i = i[ind_sn - 10:i.find("CONFIDENTIAL")]  # trim unnecessary page contains
-            '''detect subjects'''
+            # '''detect subjects'''
             [lines.append(line) for line in i.splitlines() if ('/' in line or ' PP ' in line or ' AC ' in line)]
 
             ind_sn = i.find("SEAT NO.:") + 9
