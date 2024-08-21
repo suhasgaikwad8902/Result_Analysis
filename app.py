@@ -288,3 +288,5 @@ if pdf_file is not None:
         file_name="{}.xlsx".format(pdf_name),
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+    if st.button("Go to Dashboard"):
+        st.session_state.show_second_page = True
