@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
-import os, time, shutil,io
+import os, time, shutil,io,zipfile
 
 
 # Function to process the PDF
@@ -206,33 +206,43 @@ def process_pdf(pdf_file):
 
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
             'FAIL', 'ABSENT']
-    for sub in sub_analy_list:
-        cmap = sns.color_palette("magma", len(data))
-        sns.set_style("whitegrid")
-        plt.figure(figsize=(8, 6))
-        x_data = sub['range_marks'] + [sub['failed'], sub['absent']]
-        ax = sns.barplot(x=x_data, y=data, orient='h', palette=cmap)
-        ax.set_title('AVERAGE MARKS  [{}%]'.format(round(sub['avg'], 2)), fontsize=14, fontweight='bold')
-        ax.set_xlabel('NO OF STUDENTS  \n[TOTAL {}]'.format(sub['opted']), fontsize=15, fontweight='bold')
-        ax.set_ylabel('MARKS RANGE (%)', fontsize=15, fontweight='bold')
-        for i in ax.containers:
-            ax.bar_label(i, fontsize=12, fontweight='bold')
-        plt.xticks(fontweight='bold', fontsize=14)
-        plt.yticks(fontweight='bold', fontsize=14)
-        plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
-        plt.tight_layout()  # Adjusts the spacing and margins
-        plot_buffer = io.BytesIO()
-        plt.savefig(plot_buffer, format='png')
-        plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
-        # Provide download buttons for the plots
-        (st.download_button(
-            label="{}.png".format(sub['subname'].replace('/', '-')),
-            data=plot_buffer,
-            file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
-            mime="image/png"
-        ))
+    zip_stream = io.BytesIO()
+    with zipfile.ZipFile(zip_stream, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
 
-    return output
+        for sub in sub_analy_list:
+            cmap = sns.color_palette("magma", len(data))
+            sns.set_style("whitegrid")
+            plt.figure(figsize=(8, 6))
+            x_data = sub['range_marks'] + [sub['failed'], sub['absent']]
+            ax = sns.barplot(x=x_data, y=data, orient='h', palette=cmap)
+            ax.set_title('AVERAGE MARKS  [{}%]'.format(round(sub['avg'], 2)), fontsize=14, fontweight='bold')
+            ax.set_xlabel('NO OF STUDENTS  \n[TOTAL {}]'.format(sub['opted']), fontsize=15, fontweight='bold')
+            ax.set_ylabel('MARKS RANGE (%)', fontsize=15, fontweight='bold')
+            for i in ax.containers:
+                ax.bar_label(i, fontsize=12, fontweight='bold')
+            plt.xticks(fontweight='bold', fontsize=14)
+            plt.yticks(fontweight='bold', fontsize=14)
+            plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
+            plt.tight_layout()  # Adjusts the spacing and margins
+            # plot_buffer = io.BytesIO()
+            # plt.savefig(plot_buffer, format='png')
+            # plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
+            # Provide download buttons for the plots
+            # (st.download_button(
+            #     label="{}.png".format(sub['subname'].replace('/', '-')),
+            #     data=plot_buffer,
+            #     file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
+            #     mime="image/png"
+            # ))
+            # Create a BytesIO object to hold the ZIP file
+
+            image_stream, image_name = plt
+            zip_file.writestr(f"{image_name}.png", image_stream.read())
+
+        # Reset the pointer of the BytesIO object to the beginning
+        zip_stream.seek(0)
+
+    return output, zip_stream
 
 # def plot():
 #     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
@@ -303,8 +313,9 @@ if pdf_file is not None:
     pdf_name = os.path.splitext(pdf_file.name)[0]
 
     # Process the uploaded PDF
-    excel_data = process_pdf(pdf_file)
-
+    res = process_pdf(pdf_file)
+    excel_data = res[0]
+    zip_stream = res[1]
     # Display a success message
     st.success("PDF processed successfully!")
 
@@ -319,6 +330,12 @@ if pdf_file is not None:
         data=excel_data,
         file_name="{}.xlsx".format(pdf_name),
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    st.download_button(
+        label="Download All Plots",
+        data=zip_stream,
+        file_name="plots.zip",
+        mime="application/zip"
     )
     # if st.button('Generate Plots', help="Click to Generate result analysis plots"):
     #     st.write('Generating...')
