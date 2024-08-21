@@ -20,7 +20,7 @@ def process_pdf(pdf_file):
     for j in range(num_pages - 1):
         page = pdfdoc.pages[j]
         page_content = page.extract_text()
-        print(page_content)
+        page_content
         records_per_page = page_content.count('CONFIDENTIAL')
         Students = page_content.split("CONFIDENTIAL")[:2]  # only first 2 elements
         #     type 1: 1 page 1 record  ---> records_per_page = 1
