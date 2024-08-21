@@ -106,7 +106,7 @@ def process_pdf(pdf_file):
     multiindex_df = multiindex_df.unstack()
     t1 = time.time()
     # print("TIME FOR CREATING DATAFRAMES FROM DICT DATA", t1 - start)
-    '''data transformation and cleaning'''
+    # '''data transformation and cleaning'''
     # sub list Hardcoded if mother name , seat no is excluded from result need change
     sub_list = df_students.columns[6:].tolist()
     # sub_list
