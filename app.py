@@ -224,9 +224,9 @@ def process_pdf(pdf_file):
             plt.yticks(fontweight='bold', fontsize=14)
             plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
             plt.tight_layout()  # Adjusts the spacing and margins
-            # plot_buffer = io.BytesIO()
-            # plt.savefig(plot_buffer, format='png')
-            # plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
+            plot_buffer = io.BytesIO()
+            plt.savefig(plot_buffer, format='png')
+            plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
             # Provide download buttons for the plots
             # (st.download_button(
             #     label="{}.png".format(sub['subname'].replace('/', '-')),
@@ -236,7 +236,7 @@ def process_pdf(pdf_file):
             # ))
             # Create a BytesIO object to hold the ZIP file
 
-            image_stream, image_name = plt
+            image_stream, image_name = plot_buffer
             zip_file.writestr(f"{image_name}.png", image_stream.read())
 
         # Reset the pointer of the BytesIO object to the beginning
