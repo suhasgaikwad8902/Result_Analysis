@@ -159,8 +159,8 @@ def process_pdf(pdf_file):
     top_ten.to_excel(writer, sheet_name='TOP_TEN', index=False)
     # writer.save()
     # writer.close()
-    t2 = time.time()
-    print(" time for writing excel files", t2 - t1)
+    # t2 = time.time()
+    # print(" time for writing excel files", t2 - t1)
     # '''*****************Data cleaning and Processing********************'''
     tot_no_students = len(df_students[df_students['PRN'].notnull()])
     failed_students = len(df_students[df_students['SGPA'] == 'FAIL'])
@@ -184,7 +184,7 @@ def process_pdf(pdf_file):
         sub_analy_list.append(sub_analy)
         k = k + 1
     t3 = time.time()
-    print("time for creating sub analysis list", t3 - t2)
+    # print("time for creating sub analysis list", t3 - t2)
     '''Toppers list'''
     ola = pd.DataFrame()
     for i in sub_analy_list:
