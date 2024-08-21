@@ -167,6 +167,7 @@ def process_pdf(pdf_file):
     failed_students = len(df_students[df_students['SGPA'] == 'FAIL'])
     allclear_students = len(df_students[pd.to_numeric(df_students['SGPA'], errors='coerce').notnull()])
     bins = [39, 49, 59, 69, 79, 89, 100]  # bin is (excluding, including])
+    global sub_analy_list;
     sub_analy_list = []
     k = 0
     # print("list_subdf",list_subdf)
@@ -203,7 +204,6 @@ def process_pdf(pdf_file):
     writer.close()
     output.seek(0)
 
-    global sub_analy_list
     return output
 
 def second_page():
