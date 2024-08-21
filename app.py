@@ -202,6 +202,13 @@ def process_pdf(pdf_file):
     c.to_excel(writer, sheet_name="SUBJECT WISE RESULT")
     writer.close()
     output.seek(0)
+
+    global sub_analy_list
+    return output
+
+def second_page():
+    st.title("Dashboard Page")
+    st.write("This is the empty second page where the dashboard will be displayed.")
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
             'FAIL', 'ABSENT']
     for sub in sub_analy_list:
@@ -224,14 +231,12 @@ def process_pdf(pdf_file):
         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         # Provide download buttons for the plots
         st.download_button(
-            label= "{}.png".format(sub['subname'].replace('/', '-')),
+            label="{}.png".format(sub['subname'].replace('/', '-')),
             data=plot_buffer,
             file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
             mime="image/png"
         )
         plt.close()
-    return output
-
 
 # Define custom CSS for fonts and colors
 st.markdown(
