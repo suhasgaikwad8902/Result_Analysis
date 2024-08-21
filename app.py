@@ -235,9 +235,9 @@ def process_pdf(pdf_file):
             #     mime="image/png"
             # ))
             # Create a BytesIO object to hold the ZIP file
+            image_name = f"{sub['subname'].replace('/', '-')[:31]}.png"
 
-            image_stream, image_name = plot_buffer
-            zip_file.writestr(f"{image_name}.png", image_stream.read())
+            zip_file.writestr(f"{image_name}.png", plot_buffer.read())
 
         # Reset the pointer of the BytesIO object to the beginning
         zip_stream.seek(0)
