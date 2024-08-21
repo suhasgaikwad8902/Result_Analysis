@@ -219,10 +219,13 @@ def process_pdf(pdf_file):
         plt.yticks(fontweight='bold', fontsize=14)
         plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
         plt.tight_layout()  # Adjusts the spacing and margins
+        plot_buffer = io.BytesIO()
+        plt.savefig(plot_buffer, format='png')
+        plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         # Provide download buttons for the plots
         st.download_button(
             label= "{}.png".format(sub['subname'].replace('/', '-')),
-            data=plt,
+            data=plot_buffer,
             file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
             mime="image/png"
         )
