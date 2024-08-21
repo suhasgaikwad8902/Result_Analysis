@@ -295,3 +295,10 @@ if pdf_file is not None:
     )
     if st.button("Go to Dashboard"):
         st.session_state.show_second_page = True
+    # Set up session state to manage page navigation
+    if 'show_second_page' not in st.session_state:
+        st.session_state.show_second_page = False
+
+    # Conditional display of the pages
+    if st.session_state.show_second_page:
+        second_page()
