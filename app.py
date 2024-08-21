@@ -20,7 +20,6 @@ def process_pdf(pdf_file):
     for j in range(num_pages - 1):
         page = pdfdoc.pages[j]
         page_content = page.extract_text()
-        page_content
         records_per_page = page_content.count('CONFIDENTIAL')
         Students = page_content.split("CONFIDENTIAL")[:2]  # only first 2 elements
         #     type 1: 1 page 1 record  ---> records_per_page = 1
@@ -131,12 +130,12 @@ def process_pdf(pdf_file):
     '''EXCEL FILES'''
     output = io.BytesIO()
     writer = pd.ExcelWriter(output,engine='xlsxwriter')
-    [list_subdf[i].to_excel(writer, sheet_name="{}".format(sub_list[i].replace('/', '-')[:31]), index=False, ) for i in
+    _=[list_subdf[i].to_excel(writer, sheet_name="{}".format(sub_list[i].replace('/', '-')[:31]), index=False, ) for i in
      range(len(sub_list))]
     multiindex_df.to_excel(writer, sheet_name="ALL SUBJECTS RESULT")
     backlogs = multiindex_df.apply(lambda row: row.value_counts().get("FF", 0), axis=1)  # backlogs
     backlogs.to_excel(writer, sheet_name='BACKLOGS')
-    '''*****************YEAR DOWN STUDENTS********************'''
+    # '''*****************YEAR DOWN STUDENTS********************'''
     text_onpage = pdfdoc.pages[0].extract_text()
     yd_st = pd.DataFrame()
     if ('SEM.:2' in text_onpage and 'F.E.' in text_onpage):
@@ -154,7 +153,7 @@ def process_pdf(pdf_file):
 
     yd_st.to_excel(writer, sheet_name='YEAR DOWN', index=False)
 
-    '''top ten sgpa '''
+    # '''top ten sgpa '''
     new = pd.to_numeric(df_students['SGPA'], errors='coerce')
     tenth_sgpa = sorted(new.dropna().unique(), reverse=True)[9]
     top_ten = df_students[['SEAT NO', 'NAME', 'PRN', 'SGPA']][new >= tenth_sgpa].sort_values(['SGPA'], ascending=False)
@@ -187,7 +186,7 @@ def process_pdf(pdf_file):
         k = k + 1
     t3 = time.time()
     # print("time for creating sub analysis list", t3 - t2)
-    '''Toppers list'''
+    # '''Toppers list'''
     ola = pd.DataFrame()
     for i in sub_analy_list:
         ola = pd.concat([ola, i['toppers']], axis=0)
