@@ -131,7 +131,7 @@ def process_pdf(pdf_file):
     '''EXCEL FILES'''
     output = io.BytesIO()
     writer = pd.ExcelWriter(output,engine='xlsxwriter')
-    [list_subdf[i].to_excel(writer, sheet_name="{}".format(sub_list[i].replace('/', '-')), index=False, ) for i in
+    [list_subdf[i].to_excel(writer, sheet_name="{}".format(sub_list[i].replace('/', '-')[:31]), index=False, ) for i in
      range(len(sub_list))]
     multiindex_df.to_excel(writer, sheet_name="ALL SUBJECTS RESULT")
     backlogs = multiindex_df.apply(lambda row: row.value_counts().get("FF", 0), axis=1)  # backlogs
