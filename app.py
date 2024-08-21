@@ -202,7 +202,33 @@ def process_pdf(pdf_file):
     c.to_excel(writer, sheet_name="SUBJECT WISE RESULT")
     writer.close()
     output.seek(0)
+    data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
+            'FAIL', 'ABSENT']
+    for sub in sub_analy_list:
+        cmap = sns.color_palette("magma", len(data))
+        sns.set_style("whitegrid")
+        plt.figure(figsize=(8, 6))
+        x_data = sub['range_marks'] + [sub['failed'], sub['absent']]
+        ax = sns.barplot(x=x_data, y=data, orient='h', palette=cmap)
+        ax.set_title('AVERAGE MARKS  [{}%]'.format(round(sub['avg'], 2)), fontsize=14, fontweight='bold')
+        ax.set_xlabel('NO OF STUDENTS  \n[TOTAL {}]'.format(sub['opted']), fontsize=15, fontweight='bold')
+        ax.set_ylabel('MARKS RANGE (%)', fontsize=15, fontweight='bold')
+        for i in ax.containers:
+            ax.bar_label(i, fontsize=12, fontweight='bold')
+        plt.xticks(fontweight='bold', fontsize=14)
+        plt.yticks(fontweight='bold', fontsize=14)
+        plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
+        plt.tight_layout()  # Adjusts the spacing and margins
+        # Provide download buttons for the plots
+        st.download_button(
+            label= "{}.png".format(sub['subname'].replace('/', '-')),
+            data=plt,
+            file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
+            mime="image/png"
+        )
+        plt.close()
     return output
+
 
 # Define custom CSS for fonts and colors
 st.markdown(
