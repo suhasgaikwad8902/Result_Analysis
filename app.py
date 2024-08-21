@@ -110,6 +110,7 @@ def process_pdf(pdf_file):
     '''data transformation and cleaning'''
     # sub list Hardcoded if mother name , seat no is excluded from result need change
     sub_list = df_students.columns[6:].tolist()
+    sub_list
     # print(sub_list)
     sub_det = ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP', 'P&R', 'ORD']
     # replacing .., by FAIL
