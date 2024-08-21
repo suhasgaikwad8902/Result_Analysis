@@ -12,7 +12,7 @@ def process_pdf(pdf_file):
     pdfdoc = PyPDF2.PdfReader(pdf_file)
     num_pages = len(pdfdoc.pages)
 
-    '''***************SAVE ALL STUDENT RECORDS IN DICTIONARY*******************'''
+    # '''***************SAVE ALL STUDENT RECORDS IN DICTIONARY*******************'''
 
     list_dict = []
     sub_set = set()
@@ -43,7 +43,7 @@ def process_pdf(pdf_file):
             ind_sn = i.find("SEAT NO.:") + 9
             i = i[ind_sn - 10:i.find("CONFIDENTIAL")]  # trim unnecessary page contains
             # '''detect subjects'''
-            [lines.append(line) for line in i.splitlines() if ('/' in line or ' PP ' in line or ' AC ' in line)]
+            _=[lines.append(line) for line in i.splitlines() if ('/' in line or ' PP ' in line or ' AC ' in line)]
 
             ind_sn = i.find("SEAT NO.:") + 9
             ind_name = i.find("NAME :") + 7
@@ -92,9 +92,9 @@ def process_pdf(pdf_file):
 
             list_dict.append(student_dict)
     df_students = pd.DataFrame(list_dict)
-
-    '''**************************RECORDS SAVED IN DICTIONARY********************************'''
-    '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
+    #
+    # '''**************************RECORDS SAVED IN DICTIONARY********************************'''
+    # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     overAlldf = pd.DataFrame()
     for i in list_dict:
         temp = pd.DataFrame(i, index=['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP',
@@ -110,7 +110,7 @@ def process_pdf(pdf_file):
     '''data transformation and cleaning'''
     # sub list Hardcoded if mother name , seat no is excluded from result need change
     sub_list = df_students.columns[6:].tolist()
-    sub_list
+    # sub_list
     # print(sub_list)
     sub_det = ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP', 'P&R', 'ORD']
     # replacing .., by FAIL
