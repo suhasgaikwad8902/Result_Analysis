@@ -19,7 +19,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('static/1614776.jpg');
+        background: url('/static/1614776.jpg');
         background-size: cover;
     }
     .title {
