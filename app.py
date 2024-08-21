@@ -14,9 +14,36 @@ def process_pdf(pdf_file):
 
     return text
 
+# Define custom CSS for fonts and colors
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url('1614776.jpg');
+        background-size: cover;
+    }
+    .title {
+        color: #4B0082;  /* Indigo color */
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .button {
+        background-color: #FF6347;  /* Tomato color */
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.title('Result Analysis App', help="A tool for analyzing result PDFs")
+st.write('Upload your PDF file and process it.')
+
+# Example of a styled button
+if st.button('Process PDF', key='process', help="Click to process the uploaded PDF"):
+    st.write('Processing...')
 
 # Streamlit UI
-st.title("PDF Processing App")
+# st.title("PDF Processing App")
 
 # File uploader for PDF files
 pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
