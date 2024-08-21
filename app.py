@@ -239,6 +239,8 @@ if st.button('Process PDF', key='process', help="Click to process the uploaded P
 pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
 if pdf_file is not None:
+    pdf_name = os.path.splitext(pdf_file.name)[0]
+
     # Process the uploaded PDF
     excel_data = process_pdf(pdf_file)
 
@@ -254,6 +256,6 @@ if pdf_file is not None:
     st.download_button(
         label="Download Excel File",
         data=excel_data,
-        file_name="result_analysis.xlsx",
+        file_name="{}.xlsx".format(pdf_name),
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
