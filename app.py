@@ -206,7 +206,7 @@ def process_pdf(pdf_file):
 
     return output
 
-def second_page():
+def plot():
     st.title("Dashboard Page")
     st.write("This is the empty second page where the dashboard will be displayed.")
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
@@ -293,12 +293,7 @@ if pdf_file is not None:
         file_name="{}.xlsx".format(pdf_name),
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-    if st.button("Go to Dashboard"):
-        st.session_state.show_second_page = True
-    # Set up session state to manage page navigation
-    if 'show_second_page' not in st.session_state:
-        st.session_state.show_second_page = False
+    if st.button('Generate Plots', help="Click to Generate result analysis plots"):
+        st.write('Generating...')
+        plot()
 
-    # Conditional display of the pages
-    if st.session_state.show_second_page:
-        second_page()
