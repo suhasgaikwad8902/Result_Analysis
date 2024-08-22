@@ -248,11 +248,11 @@ st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
 
 # Example of a styled button
-if st.button('Process PDF', key='process', help="Click to process the uploaded PDF"):
+if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
     st.write('Processing...')
 
 # File uploader for PDF files
-pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
+pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"])
 
 if pdf_file is not None:
     pdf_name = os.path.splitext(pdf_file.name)[0]
