@@ -280,7 +280,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('/static/1614776.jpg');
+        background: url('https://wallpaperaccess.com/august-2024-calendar');
         background-size: cover;
     }
     .title {
