@@ -280,22 +280,12 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("https://github.com/suhasgaikwad8902/Result_Analysis/blob/master/static/1614776.jpg");
-        background-size: cover;
+        background: url("https://photos.google.com/photo/AF1QipOouheYXmnfOj2U7yC1DV37WFdncGrLvyi2S-bZ");
     }
-    .title {
-        color: #4B0082;  /* Indigo color */
-        font-family: 'Comic Sans MS', cursive, sans-serif;
-    }
-    .button {
-        background-color: #FF6347;  /* Tomato color */
-        color: white;
-    }
-    </style>
+   </style>
     """,
     unsafe_allow_html=True
 )
-# [theme]
 # backgroundColor = "#F0F0F0"
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
