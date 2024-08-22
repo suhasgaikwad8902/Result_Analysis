@@ -260,6 +260,7 @@ def set_background(png_file):
     st.markdown(page_bg_img, unsafe_allow_html=True)
 # Determine the correct path for the image
 current_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir
 image_path = os.path.join(current_dir, "static", "1614776.jpg")
 set_background(image_path)
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
