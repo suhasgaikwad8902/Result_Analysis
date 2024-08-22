@@ -104,8 +104,6 @@ def process_pdf(pdf_file):
     overAlldf_sorted = overAlldf.sort_values(['SEAT NO'])
     multiindex_df = overAlldf_sorted.set_index(['SEAT NO', 'NAME', 'PRN', 'MOTHER NAME', 'CREDITS', 'SGPA', 'index'])
     multiindex_df = multiindex_df.unstack()
-    t1 = time.time()
-    # print("TIME FOR CREATING DATAFRAMES FROM DICT DATA", t1 - start)
     # '''data transformation and cleaning'''
     # sub list Hardcoded if mother name , seat no is excluded from result need change
     sub_list = df_students.columns[6:].tolist()
@@ -158,10 +156,6 @@ def process_pdf(pdf_file):
     tenth_sgpa = sorted(new.dropna().unique(), reverse=True)[9]
     top_ten = df_students[['SEAT NO', 'NAME', 'PRN', 'SGPA']][new >= tenth_sgpa].sort_values(['SGPA'], ascending=False)
     top_ten.to_excel(writer, sheet_name='TOP_TEN', index=False)
-    # writer.save()
-    # writer.close()
-    # t2 = time.time()
-    # print(" time for writing excel files", t2 - t1)
     # '''*****************Data cleaning and Processing********************'''
     tot_no_students = len(df_students[df_students['PRN'].notnull()])
     failed_students = len(df_students[df_students['SGPA'] == 'FAIL'])
@@ -170,7 +164,6 @@ def process_pdf(pdf_file):
     global sub_analy_list;
     sub_analy_list = []
     k = 0
-    # print("list_subdf",list_subdf)
     for df in list_subdf:
         total_numeric = pd.to_numeric(df['Tot%'], errors='coerce')
         topper = df[['SEAT NO', 'NAME', 'PRN', 'SGPA', 'CREDITS', 'TOTAL']][total_numeric == total_numeric.max()]
@@ -185,8 +178,6 @@ def process_pdf(pdf_file):
                      }
         sub_analy_list.append(sub_analy)
         k = k + 1
-    t3 = time.time()
-    # print("time for creating sub analysis list", t3 - t2)
     # '''Toppers list'''
     ola = pd.DataFrame()
     for i in sub_analy_list:
@@ -227,16 +218,7 @@ def process_pdf(pdf_file):
             plot_buffer = io.BytesIO()
             plt.savefig(plot_buffer, format='png')
             plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
-            # Provide download buttons for the plots
-            # (st.download_button(
-            #     label="{}.png".format(sub['subname'].replace('/', '-')),
-            #     data=plot_buffer,
-            #     file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
-            #     mime="image/png"
-            # ))
-            # Create a BytesIO object to hold the ZIP file
             image_name = f"{sub['subname'].replace('/', '-')}.png"
-
             zip_file.writestr(f"{image_name}.png", plot_buffer.read())
 
         # Reset the pointer of the BytesIO object to the beginning
@@ -270,9 +252,6 @@ st.write('Upload your PDF file and process it.')
 if st.button('Process PDF', key='process', help="Click to process the uploaded PDF"):
     st.write('Processing...')
 
-# Streamlit UI
-# st.title("PDF Processing App")
-
 # File uploader for PDF files
 pdf_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
@@ -284,14 +263,7 @@ if pdf_file is not None:
     excel_data = res[0]
     zip_stream = res[1]
     # Display a success message
-    st.success("PDF processed successfully!")
 
-    # Optionally display the extracted text
-    # st.write("Extracted Text:")
-    # st.text_area("Text", value=text, height=200)
-
-    # Allow user to download the extracted text as a file
-    # st.download_button("Download Text", data=text, file_name="extracted_text.txt")
     st.download_button(
         label="Download Excel File",
         data=excel_data,
@@ -304,8 +276,3 @@ if pdf_file is not None:
         file_name="plots.zip",
         mime="application/zip"
     )
-    # if st.button('Generate Plots', help="Click to Generate result analysis plots"):
-    #     st.write('Generating...')
-    #     for i in plot():
-    #         i
-
