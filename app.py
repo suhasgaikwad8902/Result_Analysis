@@ -255,11 +255,7 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
     if pdf_file is not None:
         processing_message = st.empty()
         processing_message.write('Processing...')
-
-        st.write('Processing...')
-
         pdf_name = os.path.splitext(pdf_file.name)[0]
-
         # Process the uploaded PDF
         res = process_pdf(pdf_file)
         excel_data = res[0]
