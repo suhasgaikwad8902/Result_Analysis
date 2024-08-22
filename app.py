@@ -295,8 +295,8 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-[theme]
-backgroundColor = "#F0F0F0"
+# [theme]
+# backgroundColor = "#F0F0F0"
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
 
