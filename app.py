@@ -280,7 +280,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('https://wallpaperaccess.com/august-2024-calendar');
+        background: url("https://github.com/suhasgaikwad8902/Result_Analysis/blob/master/static/1614776.jpg");
         background-size: cover;
     }
     .title {
@@ -295,7 +295,8 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
+[theme]
+backgroundColor = "#F0F0F0"
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
 
