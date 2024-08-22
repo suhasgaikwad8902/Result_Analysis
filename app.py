@@ -258,19 +258,10 @@ def set_background(png_file):
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
-#
-# st.markdown(
-#     """
-#     <style>
-#     .reportview-container {
-#         background: url("https://drive.google.com/uc?export=download&id=1LGBJPE98OJMoNvrrKYgfkFqoiIrgn-AV");
-#     }
-#    </style>
-#     """,
-#     unsafe_allow_html=True
-# )
-# backgroundColor = "#F0F0F0"
-set_background("static/1614776.jpg")
+# Determine the correct path for the image
+current_dir = os.path.dirname(os.path.abspath(__file__))
+image_path = os.path.join(current_dir, "static", "1614776.jpg")
+set_background(image_path)
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
 
