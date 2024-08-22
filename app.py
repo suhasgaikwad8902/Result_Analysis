@@ -280,7 +280,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("https://photos.google.com/photo/AF1QipOouheYXmnfOj2U7yC1DV37WFdncGrLvyi2S-bZ");
+        background: url("https://drive.google.com/file/d/1wiuPVQr6nAEN43LAwEC63h0CULbsFJ-A/view?usp=sharing");
     }
    </style>
     """,
