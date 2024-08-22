@@ -219,6 +219,7 @@ def process_pdf(pdf_file):
             plt.savefig(plot_buffer, format='png')
             plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
             image_name = f"{sub['subname'].replace('/', '-')}.png"
+            st.image(plot_buffer, caption=image_name, use_column_width=True)
             zip_file.writestr(f"{image_name}.png", plot_buffer.read())
 
         # Reset the pointer of the BytesIO object to the beginning
