@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
-import os, time, shutil,io,zipfile
+import os, time, shutil,io,zipfile, base64
 
 
 # Function to process the PDF
@@ -243,18 +243,33 @@ def process_pdf(pdf_file):
         zip_stream.seek(0)
 
     return output, zip_stream
-
-st.markdown(
-    """
+def get_base64(bin_file):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+        return base64.b64encode(data).decode()
+def set_background(png_file):
+    bin_str = get_base64(png_file)
+    page_bg_img = '''
     <style>
-    .reportview-container {
-        background: url("https://drive.google.com/uc?export=download&id=1LGBJPE98OJMoNvrrKYgfkFqoiIrgn-AV");
+    .stApp {
+    background-image: url("data:image/png;base64,%s");
+    background-size: cover;
     }
-   </style>
-    """,
-    unsafe_allow_html=True
-)
+    </style>
+    ''' % bin_str
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+# st.markdown(
+#     """
+#     <style>
+#     .reportview-container {
+#         background: url("https://drive.google.com/uc?export=download&id=1LGBJPE98OJMoNvrrKYgfkFqoiIrgn-AV");
+#     }
+#    </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 # backgroundColor = "#F0F0F0"
+set_background("static/1614776.jpg")
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
 st.write('Upload your PDF file and process it.')
 
