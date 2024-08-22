@@ -244,43 +244,11 @@ def process_pdf(pdf_file):
 
     return output, zip_stream
 
-# def plot():
-#     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
-#             'FAIL', 'ABSENT']
-#     a = []
-#     for sub in sub_analy_list:
-#         cmap = sns.color_palette("magma", len(data))
-#         sns.set_style("whitegrid")
-#         plt.figure(figsize=(8, 6))
-#         x_data = sub['range_marks'] + [sub['failed'], sub['absent']]
-#         ax = sns.barplot(x=x_data, y=data, orient='h', palette=cmap)
-#         ax.set_title('AVERAGE MARKS  [{}%]'.format(round(sub['avg'], 2)), fontsize=14, fontweight='bold')
-#         ax.set_xlabel('NO OF STUDENTS  \n[TOTAL {}]'.format(sub['opted']), fontsize=15, fontweight='bold')
-#         ax.set_ylabel('MARKS RANGE (%)', fontsize=15, fontweight='bold')
-#         for i in ax.containers:
-#             ax.bar_label(i, fontsize=12, fontweight='bold')
-#         plt.xticks(fontweight='bold', fontsize=14)
-#         plt.yticks(fontweight='bold', fontsize=14)
-#         plt.suptitle('{}'.format(sub['subname']), fontsize=14, fontweight='bold')
-#         plt.tight_layout()  # Adjusts the spacing and margins
-#         plot_buffer = io.BytesIO()
-#         plt.savefig(plot_buffer, format='png')
-#         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
-#         # Provide download buttons for the plots
-#         a.append(st.download_button(
-#             label="{}.png".format(sub['subname'].replace('/', '-')),
-#             data=plot_buffer,
-#             file_name="{}.png".format(sub['subname'].replace('/', '-')[:31]),  # Name based on the PDF file
-#             mime="image/png"
-#         ))
-#         plt.close()
-#     return a
-# Define custom CSS for fonts and colors
 st.markdown(
     """
     <style>
     .reportview-container {
-        background: url("https://drive.google.com/file/d/1wiuPVQr6nAEN43LAwEC63h0CULbsFJ-A/view?usp=sharing");
+        background: url("https://drive.google.com/uc?export=download&id=1LGBJPE98OJMoNvrrKYgfkFqoiIrgn-AV");
     }
    </style>
     """,
