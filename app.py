@@ -308,6 +308,13 @@ pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"]
 st.write('Upload your PDF file and process it.')
 if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
     if pdf_file is not None:
+        # Define the path to save the uploaded PDF in the static folder
+        k = 1
+        save_path = os.path.join(current_dir , 'static', str(k))
+
+        # Save the uploaded PDF to the static folder
+        with open(save_path, "wb") as f:
+            f.write(pdf_file.read())
         processing_message = st.empty()
         processing_message.write('Processing...')
         pdf_name = os.path.splitext(pdf_file.name)[0]
@@ -330,32 +337,4 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             mime="application/zip"
         )
         processing_message.empty()
-        sender_email = "verifieranthony@gmail.com"
-        sender_password = "Anthony1.123"
-
-        # Setup the MIME
-        message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = "suhassureshgaikwad@gmail.com"
-        message['Subject'] = "PDF Upload Notification"
-
-        # Attach the PDF
-        part = MIMEBase('application', 'octet-stream')
-        part.set_payload(pdf_file.read())
-        encoders.encode_base64(part)
-        part.add_header(
-            'Content-Disposition',
-            f'attachment; filename= {pdf_file.name}',
-        )
-        message.attach(part)
-
-        # Convert message to string
-        msg_full = message.as_string()
-
-        # Create a secure SSL context
-        context = ssl.create_default_context()
-
-        # Connect and login to the email server
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
-            server.login(sender_email, sender_password)
-            server.sendmail(sender_email, "suhassureshgaikwad@gmail.com", msg_full)
+        ++k
