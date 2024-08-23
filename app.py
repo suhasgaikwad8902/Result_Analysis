@@ -308,13 +308,13 @@ pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"]
 st.write('Upload your PDF file and process it.')
 if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
     if pdf_file is not None:
-        # Define the path to save the uploaded PDF in the static folder
-        k = 1
-        save_path = os.path.join(current_dir , 'static', str(k)+".pdf")
-        save_path
-        # Save the uploaded PDF to the static folder
-        with open(save_path, "wb") as f:
-            f.write(pdf_file.read())
+        # # Define the path to save the uploaded PDF in the static folder
+        # k = 1
+        # save_path = os.path.join(current_dir , 'static', str(k)+".pdf")
+        # save_path
+        # # Save the uploaded PDF to the static folder
+        # with open(save_path, "wb") as f:
+        #     f.write(pdf_file.read())
         processing_message = st.empty()
         processing_message.write('Processing...')
         pdf_name = os.path.splitext(pdf_file.name)[0]
