@@ -308,25 +308,28 @@ pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"]
 st.write('Upload your PDF file and process it.')
 if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
     if pdf_file is not None:
-        processing_message = st.empty()
-        processing_message.write('Processing...')
-        pdf_name = os.path.splitext(pdf_file.name)[0]
-        # Process the uploaded PDF
-        res = process_pdf(pdf_file)
-        excel_data = res[0]
-        zip_stream = res[1]
-        # Display a success message
+        try:
+            processing_message = st.empty()
+            processing_message.write('Processing...')
+            pdf_name = os.path.splitext(pdf_file.name)[0]
+            # Process the uploaded PDF
+            res = process_pdf(pdf_file)
+            excel_data = res[0]
+            zip_stream = res[1]
+            # Display a success message
 
-        st.download_button(
-            label="Download Excel File",
-            data=excel_data,
-            file_name="{}.xlsx".format(pdf_name),
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
-        st.download_button(
-            label="Download All Plots",
-            data=zip_stream,
-            file_name="plots.zip",
-            mime="application/zip"
-        )
-        processing_message.empty()
+            st.download_button(
+                label="Download Excel File",
+                data=excel_data,
+                file_name="{}.xlsx".format(pdf_name),
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+            st.download_button(
+                label="Download All Plots",
+                data=zip_stream,
+                file_name="plots.zip",
+                mime="application/zip"
+            )
+            processing_message.empty()
+        except:
+            print("Upload a valid PDF File")
