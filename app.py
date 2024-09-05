@@ -328,11 +328,6 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
                 file_name="plots.zip",
                 mime="application/zip"
             )
-            st.markdown("""
-                <footer style='text-align: center; margin-top: 50px;'>
-                    <p>&copy; 2024 Your Name. All rights reserved.</p>
-                </footer>
-                """, unsafe_allow_html=True)
             processing_message.empty()
         except Exception:
             st.error("Upload a valid PDF File")
