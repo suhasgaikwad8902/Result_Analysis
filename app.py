@@ -300,17 +300,15 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 image_path = os.path.join(current_dir, "static", "1614776.jpg")
 set_background(image_path)
 st.title('Result Analysis App', help="A tool for analyzing result PDFs")
-st.markdown("""
-    <footer style='text-align: center; margin-top: 50px;'>
-        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
-    </footer>
-    """, unsafe_allow_html=True)
-
-
 # File uploader for PDF files
 pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"])
 # Example of a styled button
 st.write('Upload your PDF file and process it.')
+st.markdown("""
+    <footer style='text-align: center; margin-top: 50px;'>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+    """, unsafe_allow_html=True)
 if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
     if pdf_file is not None:
         try:
