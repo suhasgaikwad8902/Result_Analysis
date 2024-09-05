@@ -331,5 +331,5 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
                 mime="application/zip"
             )
             processing_message.empty()
-        except:
+        except Exception:
             print("Upload a valid PDF File")
