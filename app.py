@@ -332,4 +332,4 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             )
             processing_message.empty()
         except Exception:
-            print("Upload a valid PDF File")
+            st.error("Upload a valid PDF File")
