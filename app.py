@@ -156,8 +156,8 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             combined_zip.seek(0)
             st.download_button(
                 label="Download All Plots and Excel",
-                data=combined_zip.seek,
-                file_name="plots.zip",
+                data=combined_zip,
+                file_name="Excel_and_plots.zip",
                 mime="application/zip"
             )
             processing_message.empty()
