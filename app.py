@@ -136,16 +136,27 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             excel_data = res[0]
             zip_stream = res[1]
             # Display a success message
+            # Combine both into a single ZIP file
+            combined_zip = io.BytesIO()
+            with zipfile.ZipFile(combined_zip, "w") as zipf:
+                # Add the Excel file
+                zipf.writestr("{}.xlsx".format(pdf_name), excel_data.getvalue())
 
+                # Extract plot files from the original ZIP and add them to the combined ZIP
+                with zipfile.ZipFile(zip_stream, "r") as plots_zip:
+                    for file_name in plots_zip.namelist():
+                        zipf.writestr(file_name, plots_zip.read(file_name))
+
+            # st.download_button(
+            #     label="Download Excel File",
+            #     data=excel_data,
+            #     file_name="{}.xlsx".format(pdf_name),
+            #     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            # )
+            combined_zip.seek(0)
             st.download_button(
-                label="Download Excel File",
-                data=excel_data,
-                file_name="{}.xlsx".format(pdf_name),
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            )
-            st.download_button(
-                label="Download All Plots",
-                data=res,
+                label="Download All Plots and Excel",
+                data=combined_zip.seek,
                 file_name="plots.zip",
                 mime="application/zip"
             )
