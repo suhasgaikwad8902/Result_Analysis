@@ -20,9 +20,12 @@ from Web_app.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
 # Function to process the PDF
 def process_pdf(pdf_file):
     list_dict, pdfdoc = convert_pdf_to_dict(pdf_file)
+    print("pdf to dict successfull")
     #
     # '''**************************RECORDS SAVED IN DICTIONARY********************************'''
     sub_list,list_subdf,multiindex_df, df_students= convert_dict_to_dataframe(list_dict)
+    print("dict to dataframe  successfull")
+
 
     # save subwise dataframe in excel sheet
     sub_analy_list, output,failed_students,bins = create_excel(sub_list, list_subdf, multiindex_df, pdfdoc, df_students)
