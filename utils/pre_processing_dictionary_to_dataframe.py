@@ -3,7 +3,6 @@ import numpy as np
 
 
 def convert_dict_to_dataframe(list_dict):
-    "Inside dict to dataframe"
     # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     df_students = pd.DataFrame(list_dict)
 
@@ -37,4 +36,4 @@ def convert_dict_to_dataframe(list_dict):
     list_subdf = [pd.concat([first_sixCol, i], axis=1) for i in list_subdf]
     # filter dataframe --> if ISE == false -->not opted for sub
     list_subdf = [i.dropna().reset_index(drop=True) for i in list_subdf]
-    return sub_list,list_subdf,multiindex_df, df_students
+    return sub_list, list_subdf, multiindex_df, df_students

@@ -2,29 +2,30 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
-import os, io,zipfile, base64
+import os, io, zipfile, base64
 
 from utils.pre_processing_dictionary_to_dataframe import convert_dict_to_dataframe
 from utils.create_excel_sheets import create_excel
 from utils.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
+
+
 # Function to process the PDF
 def process_pdf(pdf_file):
     list_dict, pdfdoc = convert_pdf_to_dict(pdf_file)
-    "pdf to dict successfull"
+
     #
     # '''**************************RECORDS SAVED IN DICTIONARY********************************'''
-    sub_list,list_subdf,multiindex_df, df_students= convert_dict_to_dataframe(list_dict)
-    "dict to dataframe  successfull"
-
+    sub_list, list_subdf, multiindex_df, df_students = convert_dict_to_dataframe(list_dict)
 
     # save subwise dataframe in excel sheet
-    sub_analy_list, output,failed_students,bins = create_excel(sub_list, list_subdf, multiindex_df, pdfdoc, df_students)
+    sub_analy_list, output, failed_students, bins = create_excel(sub_list, list_subdf, multiindex_df, pdfdoc,
+                                                                 df_students)
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
             'FAIL', 'ABSENT']
     zip_stream = io.BytesIO()
-    col1, col2, col3, col4,col5 = st.columns(5)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with zipfile.ZipFile(zip_stream, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
 
         for sub in sub_analy_list:
@@ -101,10 +102,14 @@ def process_pdf(pdf_file):
         zip_stream.seek(0)
 
         return output, zip_stream
+
+
 def get_base64(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
         return base64.b64encode(data).decode()
+
+
 def set_background(png_file):
     bin_str = get_base64(png_file)
     page_bg_img = '''
@@ -116,6 +121,8 @@ def set_background(png_file):
     </style>
     ''' % bin_str
     st.markdown(page_bg_img, unsafe_allow_html=True)
+
+
 # Determine the correct path for the image
 current_dir = os.path.dirname(os.path.abspath(__file__))
 image_path = os.path.join(current_dir, "static", "1614776.jpg")

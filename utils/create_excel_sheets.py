@@ -74,4 +74,4 @@ def create_excel(sub_list, list_subdf, multiindex_df, pdfdoc, df_students):
     c.to_excel(writer, sheet_name="SUBJECT WISE RESULT")
     writer.close()
     output.seek(0)
-    return sub_analy_list,output, failed_students, bins
+    return sub_analy_list, output, failed_students, bins

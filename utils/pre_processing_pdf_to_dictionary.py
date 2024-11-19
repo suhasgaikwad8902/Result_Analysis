@@ -2,7 +2,6 @@ import PyPDF2
 
 
 def convert_pdf_to_dict(pdf_file):
-    "Inside pdf to dict conversion"
     pdfdoc = PyPDF2.PdfReader(pdf_file)
     num_pages = len(pdfdoc.pages);
     list_dict = []
@@ -20,7 +19,7 @@ def convert_pdf_to_dict(pdf_file):
         i = i[ind_sn - 10:i.find("CONFIDENTIAL")]  # trim unnecessary page contains
         '''detect subjects'''
         [lines.append(line) for line in i.splitlines() if
-         (('/' in line or ' PP ' in line or ' AC ' in line) and 'CGPA' not in line)]#update cgpa for new pdfs
+         (('/' in line or ' PP ' in line or ' AC ' in line) and 'CGPA' not in line)]  # update cgpa for new pdfs
 
         ind_sn = i.find("SEAT NO.:") + 9
         ind_name = i.find("NAME :") + 7
