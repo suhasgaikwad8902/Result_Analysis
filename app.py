@@ -46,7 +46,7 @@ def process_pdf(pdf_file):
             plt.savefig(plot_buffer, format='png')
             plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
             image_name = f"{sub['subname'].replace('/', '-')}.png"
-            st.image(plot_buffer, caption=image_name, use_column_width=True)
+            # st.image(plot_buffer, caption=image_name, use_column_width=True)
             zip_file.writestr(f"{image_name}.png", plot_buffer.read())
         # '''Overall result plots'''
         sgpa_y = ['SGPA ABOVE 9', 'SGPA[ 8-9]', 'SGPA [7-8]', 'SGPA [6-7]', 'SGPA[5-6]', 'SGPA[4-5]', 'FAILED']
@@ -71,7 +71,7 @@ def process_pdf(pdf_file):
         plt.savefig(plot_buffer, format='png')
         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         image_name = "SGPA"
-        st.image(plot_buffer, caption=image_name, use_column_width=True)
+        # st.image(plot_buffer, caption=image_name, use_column_width=True)
         zip_file.writestr(f"{image_name}.png", plot_buffer.read())
         # '''**********************ALL SUB PASS FAIL %***********************'''
 
@@ -94,7 +94,7 @@ def process_pdf(pdf_file):
         plt.savefig(plot_buffer, format='png')
         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         image_name = "ALL SUBJECTS RESULT"
-        st.image(plot_buffer, caption=image_name, use_column_width=True)
+        # st.image(plot_buffer, caption=image_name, use_column_width=True)
         zip_file.writestr(f"{image_name}.png", plot_buffer.read())
 
         # Reset the pointer of the BytesIO object to the beginning
