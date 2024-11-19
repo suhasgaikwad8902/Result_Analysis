@@ -95,7 +95,7 @@ def process_pdf(pdf_file):
         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         image_name = "ALL SUBJECTS RESULT"
         # st.image(plot_buffer, caption=image_name, use_column_width=True)
-        zip_file.writestr(f"{image_name}.png", plot_buffer.read())
+        zip_file.writestr(f"{image_name}", plot_buffer.read())
 
         # Reset the pointer of the BytesIO object to the beginning
         zip_stream.seek(0)
@@ -145,7 +145,7 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
             )
             st.download_button(
                 label="Download All Plots",
-                data=zip_stream,
+                data=res,
                 file_name="plots.zip",
                 mime="application/zip"
             )
