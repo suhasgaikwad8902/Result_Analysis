@@ -47,7 +47,7 @@ def process_pdf(pdf_file):
             plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
             image_name = f"{sub['subname'].replace('/', '-')}"
             # st.image(plot_buffer, caption=image_name, use_column_width=True)
-            zip_file.writestr(f"{image_name}", plot_buffer.read())
+            zip_file.writestr(f"{image_name}.png", plot_buffer.read())
         # '''Overall result plots'''
         sgpa_y = ['SGPA ABOVE 9', 'SGPA[ 8-9]', 'SGPA [7-8]', 'SGPA [6-7]', 'SGPA[5-6]', 'SGPA[4-5]', 'FAILED']
         sgpa = pd.to_numeric(df_students['SGPA'], errors='coerce').dropna()
@@ -72,7 +72,7 @@ def process_pdf(pdf_file):
         plot_buffer.seek(0)  # Move the buffer cursor to the beginnin
         image_name = "SGPA"
         # st.image(plot_buffer, caption=image_name, use_column_width=True)
-        zip_file.writestr(f"{image_name}", plot_buffer.read())
+        zip_file.writestr(f"{image_name}.png", plot_buffer.read())
         # '''**********************ALL SUB PASS FAIL %***********************'''
 
         data_y = [i['subname'] + '[{}]'.format(i['opted']) for i in sub_analy_list]
