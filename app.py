@@ -1,22 +1,14 @@
 import streamlit as st
-import PyPDF2
-import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
-import os, time, shutil,io,zipfile, base64
-import smtplib
-import ssl
-from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email.mime.text import MIMEText
-from email import encoders
+import os, io,zipfile, base64
 
-from Web_app.pre_processing_dictionary_to_dataframe import convert_dict_to_dataframe
-from Web_app.create_excel_sheets import create_excel
-from Web_app.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
+from utils.pre_processing_dictionary_to_dataframe import convert_dict_to_dataframe
+from utils.create_excel_sheets import create_excel
+from utils.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
 
-
+current_dir = os.path.dirname(os.path.abspath(__file__))
 # Function to process the PDF
 def process_pdf(pdf_file):
     list_dict, pdfdoc = convert_pdf_to_dict(pdf_file)
