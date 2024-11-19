@@ -12,9 +12,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email import encoders
 
-from SPPU_resultAnalysis.result_analysis import multiindex_df
-from SPPU_resultAnalysis.result_analysis2 import list_dict, sub_list
-from Web_app.create_dataframes_from_dictionary import convert_dict_to_dataframe
+from Web_app.pre_processing_dictionary_to_dataframe import convert_dict_to_dataframe
 from Web_app.create_excel_sheets import create_excel
 from Web_app.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
 
