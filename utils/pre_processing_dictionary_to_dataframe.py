@@ -2,16 +2,16 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
-def convert_dict_to_dataframe(list_dict):
+def convert_dict_to_dataframe(list_dict, index):
     processing_message = st.empty()
     processing_message.write("Analyzing Dictionary")
     # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     df_students = pd.DataFrame(list_dict)
-
+    # ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP',
+    #  'P&R', 'ORD']
     overAlldf = pd.DataFrame()
     for i in list_dict:
-        temp = pd.DataFrame(i, index=['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP',
-                                      'P&R', 'ORD'])
+        temp = pd.DataFrame(i, index= index)
         overAlldf = pd.concat([temp, overAlldf], axis=0)
 
     overAlldf = overAlldf.reset_index()
@@ -23,7 +23,7 @@ def convert_dict_to_dataframe(list_dict):
     sub_list = df_students.columns[6:].tolist()
     # sub_list
     # print(sub_list)
-    sub_det = ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP', 'P&R', 'ORD']
+    sub_det = index
     # replacing .., by FAIL
     df_students['SGPA'][df_students['SGPA'] == '--'] = 'FAIL'
 

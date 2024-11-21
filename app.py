@@ -12,9 +12,9 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 # Function to process the PDF
 def process_pdf(pdf_file):
     # pdf to dictionary
-    list_dict, pdfdoc = convert_pdf_to_dict(pdf_file)
+    list_dict, pdfdoc, index = convert_pdf_to_dict(pdf_file)
     # dictionary to dataframe
-    sub_list, list_subdf, multiindex_df, df_students = convert_dict_to_dataframe(list_dict)
+    sub_list, list_subdf, multiindex_df, df_students = convert_dict_to_dataframe(list_dict, index)
 
     # save subwise dataframe in excel sheet
     sub_analy_list, output, failed_students, bins = create_excel(sub_list, list_subdf, multiindex_df, pdfdoc,

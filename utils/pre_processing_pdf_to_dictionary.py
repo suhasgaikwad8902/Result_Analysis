@@ -15,6 +15,10 @@ def convert_pdf_to_dict(pdf_file):
         data = data + "\n" + page_content.strip()
     Students = data.split("CONFIDENTIAL")  # only first 2 elements
     Students.pop()  # remove string after last CONFIDENTIAL
+    start = Students[0].find("COURSE NAME")
+    end = Students[0].find("\n",start)
+    sub_line = Students[0][start + 11,end]
+    index = ' '.join(sub_line.split()).split()
     for i in Students:
         lines = []
         student_dict = {}  # one dictionary for each student. key is sub name, value is records
@@ -71,4 +75,4 @@ def convert_pdf_to_dict(pdf_file):
             student_dict[sub[0] + " " + sub_sc] = data
 
         list_dict.append(student_dict)
-    return list_dict, pdfdoc
+    return list_dict, pdfdoc, index
