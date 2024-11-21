@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
-
+import streamlit as st
 
 def convert_dict_to_dataframe(list_dict):
-    print("Analyzing Dictionary")
+    processing_message = st.empty()
+    processing_message.write("Analyzing Dictionary")
     # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     df_students = pd.DataFrame(list_dict)
 

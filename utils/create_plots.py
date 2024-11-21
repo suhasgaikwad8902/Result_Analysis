@@ -6,7 +6,8 @@ import pandas as pd
 
 
 def result_plots(sub_analy_list, df_students, bins, failed_students):
-    print("Creating Plots")
+    processing_message = st.empty()
+    processing_message.write("Creating Plots")
     data = ['MARKS ABOVE 90', 'MARKS [ 80-90]', 'MARKS [70-80]', 'MARKS [60-70]', 'MARKS [50-60]', 'MARKS [40-50]',
             'FAIL', 'ABSENT']
     zip_stream = io.BytesIO()

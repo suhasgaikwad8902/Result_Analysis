@@ -1,10 +1,12 @@
 import pandas as pd
 import io
+import streamlit as st
 
 
 def create_excel(sub_list, list_subdf, multiindex_df, pdfdoc, df_students):
     # '''EXCEL FILES'''
-    print("Creating Excel sheets")
+    processing_message = st.empty()
+    processing_message.write("Creating Excel sheets")
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
     _ = [list_subdf[i].to_excel(writer, sheet_name="{}".format(sub_list[i].replace('/', '-')[:31]), index=False, ) for i

@@ -1,8 +1,10 @@
 import PyPDF2
+import streamlit as st
 
 
 def convert_pdf_to_dict(pdf_file):
-    print("Analyzing PDF")
+    processing_message = st.empty()
+    processing_message.write("Analyzing PDF")
     pdfdoc = PyPDF2.PdfReader(pdf_file)
     num_pages = len(pdfdoc.pages);
     list_dict = []
