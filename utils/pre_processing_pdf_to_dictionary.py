@@ -59,7 +59,7 @@ def convert_pdf_to_dict(pdf_file):
         for line in lines:
 
             line = ' '.join(line.split())  # to replace multiple spaces to single
-            sub = line.strip().rsplit(" ", 14)  # why 13
+            sub = line.strip().rsplit(" ", len(index))  # why 13
             #             print(sub)
             if '*' in sub[0]:
                 sub[0] = sub[0].strip('*')
