@@ -3,7 +3,7 @@ import numpy as np
 
 
 def convert_dict_to_dataframe(list_dict):
-    "Analyzing Dictionary"
+    print("Analyzing Dictionary")
     # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     df_students = pd.DataFrame(list_dict)
 
