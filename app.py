@@ -4,8 +4,8 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 import os, io, zipfile, base64
 
-from Web_app.utils.create_plots import result_plots
-from Web_app.utils.set_background import set_background
+from utils.create_plots import result_plots
+from utils.set_background import set_background
 from utils.pre_processing_dictionary_to_dataframe import convert_dict_to_dataframe
 from utils.create_excel_sheets import create_excel
 from utils.pre_processing_pdf_to_dictionary import convert_pdf_to_dict
