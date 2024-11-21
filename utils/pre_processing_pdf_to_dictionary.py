@@ -2,6 +2,7 @@ import PyPDF2
 
 
 def convert_pdf_to_dict(pdf_file):
+    "Analyzing PDF"
     pdfdoc = PyPDF2.PdfReader(pdf_file)
     num_pages = len(pdfdoc.pages);
     list_dict = []

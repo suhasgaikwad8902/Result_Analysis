@@ -1,8 +1,4 @@
-import streamlit as st
-import pandas as pd
-import seaborn as sns
-from matplotlib import pyplot as plt
-import os, io, zipfile, base64
+import os, io, zipfile
 
 from utils.create_plots import result_plots
 from utils.set_background import set_background
@@ -26,8 +22,9 @@ def process_pdf(pdf_file):
     # plots
     zip_stream = result_plots(sub_analy_list, df_students, bins, failed_students)
 
-
     return output, zip_stream
+
+
 #  set background
 st, pdf_file = set_background()
 if st.button('Analyze PDF and Generate Reports', key='process', help="Click to process the uploaded PDF"):
