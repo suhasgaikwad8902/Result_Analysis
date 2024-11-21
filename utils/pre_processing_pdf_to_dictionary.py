@@ -19,7 +19,10 @@ def convert_pdf_to_dict(pdf_file):
     end = Students[0].find("\n",start)
     sub_line = Students[0][start + 11,end]
     index = ' '.join(sub_line.split()).split()
-    print(index)
+    processing_message = st.empty()
+
+    processing_message.write(' '.join(sub_line.split()))
+
     for i in Students:
         lines = []
         student_dict = {}  # one dictionary for each student. key is sub name, value is records
