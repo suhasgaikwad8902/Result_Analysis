@@ -2,21 +2,17 @@ import pandas as pd
 import numpy as np
 import streamlit as st
 
+
 def convert_dict_to_dataframe(list_dict, index):
     processing_message = st.empty()
     processing_message.write("Analyzing Dictionary")
     # '''***************************SAVING DATAFRAME IN MULTIINDEX FORMAT*******************'''
     df_students = pd.DataFrame(list_dict)
-    # ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP',
-    #  'P&R', 'ORD']
-    processing_message = st.empty()
-    processing_message.write("df_students created")
+
     overAlldf = pd.DataFrame()
     for i in list_dict:
-        temp = pd.DataFrame(i, index= index)
+        temp = pd.DataFrame(i, index=index)
         overAlldf = pd.concat([temp, overAlldf], axis=0)
-    processing_message = st.empty()
-    processing_message.write("overalldf created")
     overAlldf = overAlldf.reset_index()
     overAlldf_sorted = overAlldf.sort_values(['SEAT NO'])
     multiindex_df = overAlldf_sorted.set_index(['SEAT NO', 'NAME', 'PRN', 'MOTHER NAME', 'CREDITS', 'SGPA', 'index'])
@@ -29,8 +25,6 @@ def convert_dict_to_dataframe(list_dict, index):
     sub_det = index
     # replacing .., by FAIL
     df_students['SGPA'][df_students['SGPA'] == '--'] = 'FAIL'
-    processing_message = st.empty()
-    processing_message.write("sub det ")
     # all sub-->list element-->transform-->dictionary--->why ->can be conv to dataframe directly
     subElement_todict = [df_students[y].apply(lambda x: {x: y for x, y in zip(sub_det, x)} if isinstance(x, list)
     else {x: y for x, y in zip(sub_det, [np.nan] * len(sub_det))}).to_list()
