@@ -9,6 +9,8 @@ def convert_dict_to_dataframe(list_dict, index):
     df_students = pd.DataFrame(list_dict)
     # ['ISE', 'ESE', 'TOTAL', 'TW', 'PR', 'OR', 'TUT', 'Tot%', 'Crd', 'Grd', 'GP', 'CP',
     #  'P&R', 'ORD']
+    processing_message = st.empty()
+    processing_message.write("df_students created")
     overAlldf = pd.DataFrame()
     for i in list_dict:
         temp = pd.DataFrame(i, index= index)
