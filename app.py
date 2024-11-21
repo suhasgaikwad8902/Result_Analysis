@@ -1,4 +1,5 @@
 import os, io, zipfile
+import traceback
 
 from utils.create_plots import result_plots
 from utils.set_background import set_background
@@ -63,5 +64,6 @@ if st.button('Analyze PDF and Generate Reports', key='process', help="Click to p
                 mime="application/zip"
             )
             processing_message.empty()
-        except Exception:
+        except Exception as e:
             st.error("Upload a valid PDF File")
+            traceback.print_exc()
