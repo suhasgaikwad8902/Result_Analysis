@@ -22,7 +22,7 @@ def set_background():
 
     # Determine the correct path for the image
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    image_path = os.path.join(current_dir, "static", "1614776.jpg")
+    image_path = os.path.join(current_dir, "static", "/ChatGPT Image Apr 3, 2025, 12_56_09 PM.png")
     set_background(image_path)
     st.title('Result Analysis App', help="A tool for analyzing result PDFs")
     # File uploader for PDF files
