@@ -24,7 +24,7 @@ def set_background():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     image_path = os.path.join(current_dir, "static", "wall.png")
     set_background(image_path)
-    st.markdown("<div style='margin-top: 50px;'></div>", unsafe_allow_html=True)  # Adds vertical space
+    st.markdown("<div style='margin-top: 100px;'></div>", unsafe_allow_html=True)  # Adds vertical space
     st.markdown("<h3 style='text-align: left;'>Result Analysis App</h3>", unsafe_allow_html=True)  # Smaller header
     # st.title('Result Analysis App', help="A tool for analyzing result PDFs")
     # File uploader for PDF files
