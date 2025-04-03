@@ -25,7 +25,7 @@ def set_background():
     image_path = os.path.join(current_dir, "static", "wall.png")
     set_background(image_path)
     st.markdown("<div style='margin-top: 50px;'></div>", unsafe_allow_html=True)  # Adds vertical space
-    st.markdown("<h3 style='text-align: right;'>Result Analysis App</h3>", unsafe_allow_html=True)  # Smaller header
+    st.markdown("<h3 style='text-align: left;'>Result Analysis App</h3>", unsafe_allow_html=True)  # Smaller header
     # st.title('Result Analysis App', help="A tool for analyzing result PDFs")
     # File uploader for PDF files
     pdf_file = st.file_uploader("Upload a PDF file(2019 Pattern) SPPU", type=["pdf"])
